@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<conio.h>
+#define MIN(x,y)(x<y?x:y)
+#define MAX(x,y)(x>y?x:y)
+#define INSIDE 0
+#define OUTSIDE 1
+
+typedef struct Point
+{
+   double x,y;
+}point;
+
+int InsidePolygon(point *polygon, int N, point P);
+int main()
+{
+    int counter=0;
+    int i;
+    double xintes;
+    int N;
+    point p,p1,p2,polygon[15];
+
+    printf("Enter the Number of Vertices: ");
+    scanf("%d",&N);
+    printf("Enter the Co-ordinates of Point P: ");
+    scanf("%lf %lf",&p.x,&p.y);
+    for(i=0; i<N; i++)
+    {
+       printf("Enter the %d Co-ordinate: ",i+1);
+       scanf("%lf %lf",&polygon[i].x,&polygon[i].y);
+    }
+
+    p1=polygon[0];
+    for(i=1;i<=N;i++)
+    {
+       p2=polygon[i%N];
+       if(p.y>MIN(p1.y,p2.y))
+       {
+          if(p.y<=MAX(p1.y,p2.y))
+          {
+             if(p.x<=MAX(p1.x,p2.x))
+             {
+                if(p1.y!=p2.y)
+                {
+                   xintes=(p.y-p1.y)*(p2.x-p1.x)/(p2.y-p1.y)+p1.x;
+                   if(p1.x==p2.x||p.x<=xintes)
+                   counter++;
+                }
+             }
+          }
+       }
+       p1=p2;
+    }
+    if(counter%2==0)
+      printf("False");
+    else
+      printf("True");
+}
